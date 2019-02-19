@@ -17,7 +17,7 @@ if ($id) {
     }
 
     $user = $ret->fetchAll(PDO::FETCH_ASSOC);
-    echo '<pre>' . print_r($user, 1) . '</pre>';
+    // echo '<pre>' . print_r($user, 1) . '</pre>';
 }
 
 
@@ -30,7 +30,8 @@ $name = $_GET['name'] ?? '';
 //    echo '<pre>' . print_r($user, 1) . '</pre>';
 //}
 
-// безопасный вариант
+
+// ** безопасный вариант
 // $mysql = new mysqli('127.0.0.1', 'root', 'root', 'test', 3306);
 // $name = mysqli_real_escape_string($mysql, $name);
 //if ($name && ($secure = 1)) {
@@ -40,3 +41,11 @@ $name = $_GET['name'] ?? '';
 //    echo '<pre>' . print_r($user, 1) . '</pre>';
 //}
 
+if (isset($_REQUEST['form_send'])) {
+    include "ajax.html";
+}
+
+if (!empty($_REQUEST['ajax'])) {
+    header('Content-type: application/json');
+    echo json_encode($user ? $user[0] : []);
+}
